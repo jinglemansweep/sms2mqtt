@@ -32,7 +32,6 @@ last_poll_time = 0
 
 
 def on_mqtt_connect(client, userdata, flags, rc):
-    print("CONNECT")
     logger.info(f"mqtt:connect rc={str(rc)}")
 
 
