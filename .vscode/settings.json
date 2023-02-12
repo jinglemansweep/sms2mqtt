@@ -1,0 +1,9 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "mypy.runUsingActiveInterpreter": true,
+    "files.exclude": {
+        "**/__pycache__": true
+    }
+}

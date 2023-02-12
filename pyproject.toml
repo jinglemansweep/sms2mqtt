@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sms2mqtt"
+version = "0.1.0"
+description = "SMS (Cloud) to MQTT Gateway"
+authors = ["Louis King <jinglemansweep@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+poetry = "^1.3.2"
+black = "^23.1.0"
+python-dotenv = "^0.21.1"
+paho-mqtt = "^1.6.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
