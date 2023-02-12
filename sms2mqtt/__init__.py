@@ -51,7 +51,7 @@ mqtt_client.connect(MQTT_HOST, MQTT_PORT, 60)
 def get_inboxes(api_key):
     url = f"{API_URL}/get_inboxes/?"
     payload = dict(apikey=api_key)
-    logger.info(f"get_inboxes api_key={api_key}")
+    logger.info(f"get_inboxes")
     try:
         r = requests.post(url, data=payload)
         return json.loads(r)
@@ -63,7 +63,7 @@ def get_messages(api_key, inbox_id):
     global last_poll_time
     url = f"{API_URL}/get_messages/?"
     payload = dict(apikey=api_key, inbox_id=inbox_id, min_time=last_poll_time)
-    logger.info(f"get_messages api_key={api_key} inbox_id={inbox_id}")
+    logger.info(f"get_messages inbox_id={inbox_id}")
     try:
         r = requests.post(url, data=payload)
         response = json.loads(r.text)
