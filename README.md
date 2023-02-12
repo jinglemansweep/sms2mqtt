@@ -1,11 +1,11 @@
 # SMS2MQTT
 
-A simple SMS to MQTT gateway for polling TextLocal API and publishing any received SMS text messages to an MQTT broker.
+A simple SMS to MQTT gateway for polling [TextLocal](http://textlocal.co.uk/) API and publishing any received SMS text messages to an MQTT broker.
 
 ## Requirements
 
 * MQTT Server (e.g. Mosquitto)
-* API Key, Inbox ID from TextLocal SMS service
+* API Key, Inbox ID from [TextLocal](http://textlocal.co.uk/) SMS service
 
 You will need an account at TextLocal to use their excellent SMS services. A free account provides you with a fixed keyword (e.g. `ABCDE`) on one of their shared short numbers (e.g. `60777`). Messages can be sent to the short number but the message must contain the fixed keyword in order for it to be processed.
 
