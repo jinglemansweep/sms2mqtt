@@ -21,8 +21,7 @@ MQTT_PORT = int(os.environ.get("MQTT_PORT", 1883))
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
 MQTT_TOPIC_PREFIX = os.environ.get("MQTT_TOPIC_PREFIX", "sms2mqtt")
-
-POLL_INTERVAL = int(os.environ.get("TEXTLOCAL_POLL_INTERVAL", 60))
+POLL_INTERVAL = int(os.environ.get("TEXTLOCAL_POLL_INTERVAL", 300))
 API_KEY = os.environ.get("TEXTLOCAL_API_KEY")
 INBOX_ID = os.environ.get("TEXTLOCAL_INBOX_ID")
 INBOX_KEYWORD = os.environ.get("TEXTLOCAL_INBOX_KEYWORD")
@@ -33,8 +32,8 @@ last_poll_time = 0
 
 
 def on_mqtt_connect(client, userdata, flags, rc):
+    print("CONNECT")
     logger.info(f"mqtt:connect rc={str(rc)}")
-    client.subscribe("#")
 
 
 def on_mqtt_message(client, userdata, msg):
@@ -47,7 +46,7 @@ if MQTT_USER is not None:
     mqtt_client.username_pw_set(MQTT_USER, password=MQTT_PASSWORD)
 mqtt_client.on_connect = on_mqtt_connect
 mqtt_client.on_message = on_mqtt_message
-mqtt_client.loop_start()
+mqtt_client.connect(MQTT_HOST, MQTT_PORT, 60)
 
 
 def get_inboxes(api_key):
@@ -96,7 +95,8 @@ while True:
         for msg in messages:
             topic = build_topic(msg.get("number"))
             payload = clean_message(msg.get("message"))
-            resp = mqtt_client.publish(topic, payload, qos=2, retain=True)
+            resp = mqtt_client.publish(topic, payload, qos=2)
             logger.info(f"mqtt:send topic={topic} payload={payload} resp={resp}")
     logger.info(f"poll:sleep interval={POLL_INTERVAL}")
+    mqtt_client.loop()
     time.sleep(POLL_INTERVAL)
