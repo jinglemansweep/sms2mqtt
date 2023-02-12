@@ -1,0 +1,8 @@
+services:
+  sms2mqtt:
+    build:
+      context: .
+    env_file:
+      - ./.env
+    
+    
